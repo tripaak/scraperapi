@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <h1> ManoMano Scraper  </h1>
+</div>
+    
+
+<div class="content-section">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Upload EAN file</legend>
+            <div class="form-group">
+                {% if form %}
+                {{form.hidden_tag()}}
+                {{form.file()}}
+                {{form.submit()}}
+                {% endif%}
+     
+            </div>
+            </legend>  
+        </fieldset>
+    </form>
+</div>
+<div class="content-section">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+
+    <form method="POST" action="/run">
+        <form method="POST" enctype="multipart/form-data">
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Scraper</legend>
+                <div class="form-group">
+                    <input type="submit", name="Run scraper", value="Run scraper">
+                </div>
+            </legend>  
+        </fieldset>
+    </form>
+    <form method="GET" action="/downloadFile">
+        <legend class="border-bottom mb-4">Download file</legend>
+        <input type="submit", name="Download File", value="Download File">
+    </form>
+</div>
+{% endblock content %}
